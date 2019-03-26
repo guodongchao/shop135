@@ -17,4 +17,4 @@ Route::get('/', function () {
 
 
 
-Route::get('/addcart','Cart\IndexController@add2');
+Route::any('/addcart','Cart\IndexController@add2');

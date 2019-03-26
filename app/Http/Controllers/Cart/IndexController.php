@@ -16,8 +16,8 @@ class IndexController extends Controller
 
     public function add2(Request $request)
     {
-        
-
+        $post_data=$_POST;
+        var_dump($post_data);exit;
         //写入购物车表
         $data = [
             'goods_id'  => 2,
