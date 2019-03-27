@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Goods;
 use App\Model\GoodsModel;
+use App\Model\CartAdd;
 use Illuminate\Http\Request;
 class GoodsControllers
 {
@@ -23,5 +24,28 @@ class GoodsControllers
         ];
         $info=GoodsModel::where($data)->get();
         return $info;
+    }
+    public function cartadd(Request $request){
+        $goods_id=$request->input('id');
+        $data=[
+          'goods_id'=>$goods_id,
+          'uid'     =>setcookie('xnn_uid'),
+          'num'     =>1,
+          'session_token'=>setcookie('xnn_token'),
+          'add_time'=>time()
+        ];
+        $res=CartAdd::insertGetId($data);
+        if($res){
+            $response=[
+                'errno'=>0,
+                'msg'  =>"添加成功"
+            ];
+        }else{
+            $response=[
+                'errno'=>50001,
+                'msg'  =>"添加失败"
+            ];
+        }
+        return $response;
     }
 }
