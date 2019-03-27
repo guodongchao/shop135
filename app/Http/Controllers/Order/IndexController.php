@@ -6,21 +6,23 @@
  * Time: 下午 07:44
  */
 
-namespace App\Http\Controllers\Goods;
+namespace App\Http\Controllers\Order;
+use App\Model\CartAdd;
 use App\Model\CartModel;
 use App\Model\GoodsModel;
 use App\Model\OrderModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class OrderController extends Controller
+class IndexController extends Controller
 {
     public function add(Request $request)
     {
         //查询购物车商品
-        $goods_id=3;
-        $goods = CartModel::where(['goods_id' =>$goods_id])->first();
-        if (empty($cart_goods)) {
+        //$cart_id=$request->input('cart_id');
+        $cart_id=1;
+        $info = CartAdd::where(['cart_id' =>$cart_id])->first();
+        if (empty($info)) {
             die("购物车中无商品");
         }
         //生成订单号
@@ -29,7 +31,7 @@ class OrderController extends Controller
             'order_sn' => $order_sn,
             'uid' => session()->get('uid'),
             'add_time' => time(),
-            'order_amount' => $goods['price']
+            'order_amount' => $info['cart_pirce']
         ];
 
         $oid = OrderModel::insertGetId($data);
