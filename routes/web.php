@@ -14,4 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+<<<<<<< HEAD
 Route::get('cart','Goods\UserController@cart');
+=======
+Route::get('/goods','Goods\GoodsControllers@show');
+>>>>>>> ce0a1ecefc975b15bed798f8f7e9a8988242ed6c
