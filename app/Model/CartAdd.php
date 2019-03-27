@@ -11,6 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class CartAdd extends  Model
 {
-    public $table = 'cart';
+    public $table = 'cart2';
     public $timestamps = false;
 }

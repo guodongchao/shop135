@@ -25,14 +25,17 @@ class GoodsControllers
         $info=GoodsModel::where($data)->get();
         return $info;
     }
+
     public function cartadd(Request $request){
         $goods_id=$request->input('id');
+        $info=GoodsModel::where(['goods_id'=>$goods_id])->first();
         $data=[
-          'goods_id'=>$goods_id,
+          'cart_name'=>$info['goods_name'],
           'uid'     =>setcookie('xnn_uid'),
-          'num'     =>1,
-          'session_token'=>setcookie('xnn_token'),
-          'add_time'=>time()
+          'cart_num'     =>1,
+          'token'=>setcookie('xnn_token'),
+          'add_time'=>time(),
+          'cart_pirce'
         ];
         $res=CartAdd::insertGetId($data);
         if($res){
