@@ -17,6 +17,8 @@ class UserController extends Controller
 {
     public function cart(){
         $data = CartModel::get();
-        return $data;
+        $res = json_encode($data);
+      //  print_r($res);
+        return $res;
     }
 }
