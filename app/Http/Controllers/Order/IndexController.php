@@ -19,8 +19,8 @@ class IndexController extends Controller
     public function add(Request $request)
     {
         //查询购物车商品
-        //$cart_id=$request->input('cart_id');
-        $cart_id=1;
+        $cart_id=$request->input('cart_id');
+        //$cart_id=1;
         $info = CartAdd::where(['cart_id' =>$cart_id])->first();
         if (empty($info)) {
             die("购物车中无商品");
@@ -35,17 +35,23 @@ class IndexController extends Controller
         ];
 
         $oid = OrderModel::insertGetId($data);
-        if (!$oid) {
-            echo '生成订单失败';
+        if ($oid) {
+           $response=[
+               'errno'=>0,
+               'msg'  =>"订单成功"
+           ];
         } else {
-            header('Refresh:2;url=show');
-            echo '下单成功,订单号：' . $oid . ' 跳转支付';
+            $response=[
+                'errno'=>50001,
+                'msg'  =>"订单失败"
+            ];
         }
+        return $response;
     }
 
     public function show()
     {
-        $list = OrderModel::all();
+        $list = OrderModel::get();
         return $list;
     }
 }
