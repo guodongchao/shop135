@@ -17,11 +17,8 @@ class GoodsControllers
     }
     public function showadd(Request $request){
         $id=$request->input('id');
-        echo $id;
-        $data=[
-            'goods_id'=>$id
-        ];
-        $info=GoodsModel::where($data)->get();
-        return $info;
+
+
+        return $id;
     }
 }
