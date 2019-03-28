@@ -142,8 +142,10 @@ class GoodsControllers
         $uid = $request->input('uid');
         $key = 'sets:goods_fav:'.$uid;
         $rs = Redis::zrange($key,0,-1);
+        $aa=implode($rs,"','");
+        $aaa= "'.$aa.'";
         $where = [
-            'goods_id' =>$rs
+            'goods_id' =>[$aaa]
         ];
         $res = GoodsModel::where($where)->get();
         return $res;
