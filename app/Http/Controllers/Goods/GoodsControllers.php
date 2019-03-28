@@ -103,4 +103,42 @@ class GoodsControllers
         return $info;
 
     }
+    /*
+     * 收藏
+     */
+    public function cartadd4(){
+        $aa=cookie('xnn_uid');
+        echo $aa;
+    }
+    public function cartadd3(Request $request){
+        $uid = $request->input('uid');
+
+        //$uid = 1;
+        $goods_id = $request->input('id');
+        //$goods_id = 11;
+        $key = 'sets:goods_fav:'.$uid;
+        $rs = Redis::zrange($key,0,-1);
+        foreach($rs as $k=>$v){
+            if($v==$goods_id){
+                return [
+                    'error' =>  522200,
+                    'msg'   =>  '请勿重复收藏'
+                ];
+            }
+        }
+        $rs = Redis::zAdd($key,time(),$goods_id);
+        if($rs){
+            return [
+                'error' =>  0,
+                'msg'   =>  '收藏成功'
+            ];
+        }else{
+            return [
+                'error' =>  522201,
+                'msg'   =>  '收藏失败'
+            ];
+        }
+
+    }
+
 }
