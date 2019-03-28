@@ -31,6 +31,7 @@ class UserController extends Controller
     }
 
 
+
     /**
     *移动端登录处理页面
      */
@@ -67,6 +68,7 @@ class UserController extends Controller
         }
 
         $pas = $userInfo->pass;
+        $xnn_uid = $userInfo->uid;
         if(password_verify($password,$pas)){
             $uid = $userInfo->uid;
             $key = 'token:' . $uid;
@@ -79,15 +81,14 @@ class UserController extends Controller
                 Redis::hSet($key,'web',$token);
                 //  var_dump($token);exit;
             }
-            $xnn_uid=setcookie('xnn_uid',$uid,time()+86400,'/','qianqianya.xyz',false,true);
-            $xnn_token=setcookie('xnn_token',$token,time()+86400,'/','qianqianya.xyz',false,true);
+            setcookie('xnn_uid',$uid,time()+86400,'/','qianqianya.xyz',false,true);
+            setcookie('xnn_token',$token,time()+86400,'/','qianqianya.xyz',false,true);
             $request->session()->put('xnn_u_token',$token);
             $request->session()->put('xnn_uid',$uid);
             $response = [
                 'errno' =>  0,
                 'msg'   =>  '登陆成功',
                 'uid'   =>$xnn_uid,
-                'xnn_token'=>$xnn_token
             ];
         }else{
             $response = [

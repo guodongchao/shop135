@@ -23,6 +23,7 @@ Route::post('/userlogin', 'User\UserController@loginAction');//登录页面
 Route::get('/apilogin','User\UserController@alogin'); //访问登录页面
 Route::post('/apilogin','User\UserController@apilogins'); //登录页面
 
+
 Route::get('/goods','Goods\GoodsControllers@show');//商品展示
 Route::get('/goodsadd','Goods\GoodsControllers@showadd');//商品详情
 Route::get('/cart','Goods\UserController@cart');//购物车展示
@@ -31,7 +32,7 @@ Route::get('/cartadd','Goods\GoodsControllers@cartadd');//加入购物车
 
 Route::get('/cartadd2','Goods\GoodsControllers@cartadd2');//点赞
 Route::get('/cartadd3','Goods\GoodsControllers@cartadd3');//收藏
-Route::get('/cartadd4','Goods\GoodsControllers@cartadd4');//收藏
+
 
 
 Route::post('/order','Order\IndexController@add');//生成订单

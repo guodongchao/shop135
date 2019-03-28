@@ -104,10 +104,6 @@ class GoodsControllers
 
     }
 
-    public function cartadd4(){
-        $aa=cookie('xnn_uid');
-        echo $aa;
-    }
     /*
      * 收藏
      */
