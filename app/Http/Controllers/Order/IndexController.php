@@ -59,9 +59,10 @@ class IndexController extends Controller
     {
         $uid=$request->input('uid');
         $data=[
-            'uid'=>$uid
+            'uid' =>$uid,
+            'status' =>1
         ];
-        $list = OrderModel::where()->get();
+        $list = OrderModel::where($data)->get();
         return $list;
     }
 }
