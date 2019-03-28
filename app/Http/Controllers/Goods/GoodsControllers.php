@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Goods;
 use App\Model\GoodsModel;
 use App\Model\CartAdd;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 class GoodsControllers
 {
     public function show(){
@@ -25,7 +26,9 @@ class GoodsControllers
         $info=GoodsModel::where($data)->get();
         return $info;
     }
-
+    /**
+    *加入购物车
+     */
     public function cartadd(Request $request){
         $goods_id=$request->input('id');
         $info=GoodsModel::where(['goods_id'=>$goods_id])->first();
@@ -53,5 +56,51 @@ class GoodsControllers
             ];
         }
         return $response;
+    }
+    /**
+     * 点赞
+     */
+    public function cartadd2(Request $request){
+        $id=$request->input('id');
+        $where = [
+
+            'goods_id'  =>  $id,
+
+        ];
+
+        $key = 'set:goods_click:'.$id;
+
+        Redis::zadd($key,time(),time());
+
+
+
+        $goods_key = 'str:goods_detail:'.$id;
+
+        $data = Redis::get($goods_key);
+
+        if(empty($data)){
+
+            $info = GoodsModel::where($where)->first();
+
+            Redis::set($goods_key,json_encode($info));
+
+            Redis::expire($goods_key,60*60*3);
+
+
+
+        }else{
+
+            $info = json_decode($data,true);
+
+        }
+
+        $res= Redis::zCard($key);
+        $info=[
+          'erron'   =>2,
+          'msg'     =>'点赞成功',
+          'click'   =>$res
+        ];
+        return $info;
+
     }
 }
