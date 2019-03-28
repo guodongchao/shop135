@@ -137,7 +137,9 @@ class GoodsControllers
         }
 
     }
-
+    /*
+     * 收藏展示
+     */
     public function cartadd4(Request $request){
         $uid = $request->input('uid');
         $key = 'sets:goods_fav:'.$uid;
