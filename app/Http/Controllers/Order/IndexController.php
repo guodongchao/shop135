@@ -20,10 +20,8 @@ class IndexController extends Controller
     {
         //查询购物车商品
         $cart_id=$request->input('cart_id');
-
-        //$cart_id=1;
+        //根据id查询一条数据
         $info = CartAdd::where(['cart_id' =>$cart_id])->first();
-        var_dump($info);exit;
         if (empty($info)) {
             die("购物车中无商品");
         }
