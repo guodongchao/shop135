@@ -142,13 +142,11 @@ class GoodsControllers
         $uid = $request->input('uid');
         $key = 'sets:goods_fav:'.$uid;
         $rs = Redis::zrange($key,0,-1);
-
-
         $where = [
             'goods_id' =>$rs
         ];
         $res = GoodsModel::where($where)->get();
-        var_dump($res);
+        return $res;
     }
 
 }
