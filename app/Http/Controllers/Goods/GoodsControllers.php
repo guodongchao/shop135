@@ -103,13 +103,14 @@ class GoodsControllers
         return $info;
 
     }
-    /*
-     * 收藏
-     */
+
     public function cartadd4(){
         $aa=cookie('xnn_uid');
         echo $aa;
     }
+    /*
+     * 收藏
+     */
     public function cartadd3(Request $request){
         $uid = $request->input('uid');
 
@@ -129,7 +130,7 @@ class GoodsControllers
         $rs = Redis::zAdd($key,time(),$goods_id);
         if($rs){
             return [
-                'error' =>  0,
+                'error' =>  3,
                 'msg'   =>  '收藏成功'
             ];
         }else{
