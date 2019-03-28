@@ -24,7 +24,11 @@ class IndexController extends Controller
         //根据id查询一条数据
         $info = CartAdd::where(['cart_id' =>$cart_id])->first();
         if (empty($info)) {
-            die("购物车中无商品");
+            $response=[
+                'errno'=>50001,
+                'msg'  =>"购物车已无次商品"
+            ];
+            return $response;
         }
         //生成订单号
         $order_sn = OrderModel::Ordernumber();

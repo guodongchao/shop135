@@ -20,7 +20,16 @@ class UserController extends Controller
           'status'=>1
         ];
         $data = CartModel::where($data)->get();
+        if($data){
+            return $data;
+        }else{
+             $data=[
+                'errno'=>50001,
+                'msg'  =>"购物车太空了"
+            ];
+            return $data;
+        }
       //  print_r($res);
-        return $data;
+
     }
 }
