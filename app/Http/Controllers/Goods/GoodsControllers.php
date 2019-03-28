@@ -142,18 +142,19 @@ class GoodsControllers
         $uid = $request->input('uid');
         $key = 'sets:goods_fav:'.$uid;
         $rs = Redis::zrange($key,0,-1);
-       // var_dump($rs);exit;
-        $arr='';
-        foreach($rs as $k=>$v ){
-            if(!empty($v)){
-                $arr=implode(',',$v);
-            }
-        }
 
-        $where = [
-            'goods_id' =>$arr
-        ];
-        $res = GoodsModel::where($where)->get();
+        var_dump($rs);exit;
+//        $arr='';
+//        foreach($rs as $k=>$v ){
+//            if(!empty($v)){
+//                $arr=implode(',',);
+//            }
+//        }
+//
+//        $where = [
+//            'goods_id' =>$arr
+//        ];
+        //$res = GoodsModel::where($where)->get();
     }
 
 }
