@@ -143,9 +143,11 @@ class GoodsControllers
         $key = 'sets:goods_fav:'.$uid;
         $rs = Redis::zrange($key,0,-1);
        // var_dump($rs);exit;
-        $arr =  '';
+        $arr='';
         foreach($rs as $k=>$v ){
-            echo $v;exit;
+            if(!empty($v)){
+                $arr=implode(',',$v);
+            }
         }
 
         $where = [
