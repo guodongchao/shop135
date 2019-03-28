@@ -31,12 +31,13 @@ class GoodsControllers
      */
     public function cartadd(Request $request){
         $goods_id=$request->input('id');
+        $uid=$request->input('uid');
         $info=GoodsModel::where(['goods_id'=>$goods_id])->first();
 
 
         $data=[
           'cart_name'=>$info['goods_name'],
-          'uid'     =>setcookie('xnn_uid'),
+          'uid'     =>$uid,
           'cart_num'     =>1,
           'token'=>setcookie('xnn_token'),
           'add_time'=>time(),
