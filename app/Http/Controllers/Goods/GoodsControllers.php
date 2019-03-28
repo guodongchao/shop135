@@ -144,6 +144,7 @@ class GoodsControllers
         $rs = Redis::zrange($key,0,-1);
         $aa=implode($rs,"','");
         $aaa= "'.$aa.'";
+        echo $aaa;exit;
         $where = [
             'goods_id' =>[$aaa]
         ];
