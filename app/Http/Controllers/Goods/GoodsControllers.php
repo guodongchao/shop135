@@ -138,4 +138,20 @@ class GoodsControllers
 
     }
 
+    public function cartadd4(Request $request){
+        $uid = $request->input('uid');
+
+        $key = 'sets:goods_fav:'.$uid;
+        $rs = Redis::zrange($key,0,-1);
+        $arr =  '';
+        foreach($rs as $k=>$v ){
+            $arr = $v;
+        }
+
+        $where = [
+            'goods_id' =>$arr
+        ];
+        $res = GoodsModel::where($where)->get();
+    }
+
 }

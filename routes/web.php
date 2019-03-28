@@ -33,6 +33,8 @@ Route::get('/cartadd','Goods\GoodsControllers@cartadd');//加入购物车
 Route::get('/cartadd2','Goods\GoodsControllers@cartadd2');//点赞
 Route::get('/cartadd3','Goods\GoodsControllers@cartadd3');//收藏
 
+Route::post('/cartadd4','Goods\GoodsControllers@cartadd4');//收藏列表
+
 
 
 Route::post('/order','Order\IndexController@add');//生成订单
