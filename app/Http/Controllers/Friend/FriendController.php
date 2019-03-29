@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Friend;
 use App\Model\FriendModel;
+use App\Model\UserModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,5 +27,21 @@ class FriendController extends Controller
         }else{
             return '删除失败';
         }
+    }
+    public function friendshow(Request $request){
+        $u_name=$request->input('u_name');
+        $arr=UserModel::where(['name'=>$u_name])->first();
+        if($arr){
+            $info=[
+                'error'=>0,
+                'msg'   =>$arr
+            ];
+        }else{
+            $info=[
+                'error'=>0,
+                'msg'   =>'好友不存在'
+            ];
+        }
+        return $info;
     }
 }
