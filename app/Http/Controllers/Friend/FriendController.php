@@ -120,4 +120,28 @@ class FriendController extends Controller
         }
         return $info;
     }
+    public  function friendadd(Request $request){
+        $id=$request->input('id');
+        $arr=UserModel::where(['uid'=>$id])->first();
+        $data=[
+            'id'=>$arr['uid'],
+            'name'     =>$arr['name'],
+            'age'     =>$arr['age'],
+            'email'=>$arr['email'],
+            'reg_time'=>time()
+        ];
+        $res=FriendModel::insertGetId($data);
+        if($res){
+            $response=[
+                'errno'=>0,
+                'msg'  =>"添加成功"
+            ];
+        }else{
+            $response=[
+                'errno'=>50001,
+                'msg'  =>"添加失败"
+            ];
+        }
+        return $response;
+    }
 }

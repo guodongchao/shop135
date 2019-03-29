@@ -23,5 +23,6 @@ class VerifyCsrfToken extends Middleware
         '/friend',
         '/del',
         '/friendshow',
+        '/friendadd',
     ];
 }
