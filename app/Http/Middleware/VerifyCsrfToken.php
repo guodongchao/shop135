@@ -19,6 +19,7 @@ class VerifyCsrfToken extends Middleware
         '/cartadd4',
         '/cartadd5',
         '/pwd',
-        '/friend'
+        '/friend',
+        '/*',
     ];
 }
