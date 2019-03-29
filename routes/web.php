@@ -22,5 +22,5 @@ Route::get('/cartadd','Goods\GoodsControllers@cartadd');
 
 
 Route::post('/order','Order\IndexController@add');
-Route::post('/show','Order\IndexController@show');
+Route::get('/order/show','Order\IndexController@show');
 
