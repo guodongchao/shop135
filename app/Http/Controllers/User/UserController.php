@@ -42,6 +42,7 @@ class UserController extends Controller
                             'msg'  =>'新密码不能和原密码一致'
                         ];
                     }else{
+                        $upwd=password_hash($upwd,PASSWORD_BCRYPT);
                         $res=UserModel::where(['uid'=>$uid])->update(['pass'=>$upwd]);
                         if($res){
                             $info=[
