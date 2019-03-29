@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Friend;
 use foo\bar;
 use App\Model\FriendModel;
+use App\Model\UserModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redis;
@@ -101,5 +102,24 @@ class FriendController extends Controller
         ];
         return $info;
     }
+
+    public function friendshow(Request $request){
+        $u_name=$request->input('u_name');
+        $arr=UserModel::where(['name'=>$u_name])->first();
+        if($arr){
+            $info=[
+                'error'=>0,
+                'msg'   =>$arr
+            ];
+        }else{
+            $info=[
+                'error'=>0,
+                'msg'   =>'好友不存在'
+            ];
+        }
+        return $info;
+    }
+
+
 
 }
