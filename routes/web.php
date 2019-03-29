@@ -23,6 +23,7 @@ Route::post('/userlogin', 'User\UserController@loginAction');//登录页面
 Route::get('/apilogin','User\UserController@alogin'); //访问登录页面
 Route::post('/apilogin','User\UserController@apilogins'); //登录页面
 
+Route::post('/pwd','User\UserController@pwd'); //修改密码
 
 Route::get('/goods','Goods\GoodsControllers@show');//商品展示
 Route::get('/goodsadd','Goods\GoodsControllers@showadd');//商品详情
