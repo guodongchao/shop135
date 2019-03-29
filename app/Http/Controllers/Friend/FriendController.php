@@ -106,6 +106,7 @@ class FriendController extends Controller
     public function friendshow(Request $request){
         $u_name=$request->input('u_name');
         $arr=UserModel::where(['name'=>$u_name])->first();
+        print_r($arr);exit;
         if($arr){
             $info=[
                 'error'=>0,
