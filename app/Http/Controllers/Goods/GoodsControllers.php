@@ -148,10 +148,10 @@ class GoodsControllers
         $res = Redis::zrange($key,0,-1);
 
         foreach ($res as $k=>$v){
-            $data=GoodsModel::where(['goods_id'=>$v])->get()->toArray();
-            $info[]=$data;
+            $arr=GoodsModel::where(['goods_id'=>$v])->get()->toArray();
+            $data[]=$arr;
         }
-        return $info;
+        return $data;
 
     }
 
