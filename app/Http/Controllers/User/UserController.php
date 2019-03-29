@@ -320,7 +320,7 @@ class UserController extends Controller
 
         $pass=$request->input('u_pwd');
 
-        $pass1=$request->input('u_pwd1');
+        $pass1=$request->input('yespwd');
 
         $re=UserModel::where(['name'=>$request->input('u_name')])->first();
 
