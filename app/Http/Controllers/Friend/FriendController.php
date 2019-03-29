@@ -105,9 +105,8 @@ class FriendController extends Controller
 
     public function friendshow(Request $request){
         $u_name=$request->input('u_name');
-        echo $u_name;exit;
         $arr=UserModel::where(['name'=>$u_name])->first();
-        if (empty($info)) {
+        if (empty($arr)) {
             $response=[
                 'errno'=>50001,
                 'msg'  =>"暂无好友"
