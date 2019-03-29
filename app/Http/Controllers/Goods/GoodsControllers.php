@@ -146,7 +146,12 @@ class GoodsControllers
         $uid = $request->input('uid');
         $key = 'str:goods_click:'.$uid;
         $res = Redis::zrange($key,0,-1);
-        print_r($res);
+
+        foreach ($rs as $k=>$v){
+            $data=GoodsModel::where(['goods_id'=>$v])->get()->toArray();
+            $info[]=$data;
+        }
+        return $info;
 
     }
 
