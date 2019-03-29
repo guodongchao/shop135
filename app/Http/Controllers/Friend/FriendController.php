@@ -113,7 +113,7 @@ class FriendController extends Controller
             ];
             return $response;
          }
-        return $info;
+        return $arr ;
     }
 
 }
