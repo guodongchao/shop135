@@ -62,46 +62,32 @@ class GoodsControllers
      * 点赞
      */
     public function cartadd2(Request $request){
-        $id=$request->input('id');
-        $where = [
-
-            'goods_id'  =>  $id,
-
-        ];
-
-        $key = 'set:goods_click:'.$id;
-
-        Redis::zadd($key,time(),time());
-
-
-
-        $goods_key = 'str:goods_detail:'.$id;
-
-        $data = Redis::get($goods_key);
-
-        if(empty($data)){
-
-            $info = GoodsModel::where($where)->first();
-
-            Redis::set($goods_key,json_encode($info));
-
-            Redis::expire($goods_key,60*60*3);
-
-
-
-        }else{
-
-            $info = json_decode($data,true);
-
+        $uid = $request->input('uid');
+        //$uid = 1;
+        $goods_id = $request->input('id');
+        //$goods_id = 11;
+        $key = 'sets:goods_click:'.$uid;
+        $rs = Redis::zrange($key,0,-1);
+        foreach($rs as $k=>$v){
+            if($v==$goods_id){
+                return [
+                    'erron' =>  522200,
+                    'msg'   =>  '请勿重复点赞'
+                ];
+            }
         }
-
-        $res= Redis::zCard($key);
-        $info=[
-          'erron'   =>2,
-          'msg'     =>'点赞成功',
-          'click'   =>$res
-        ];
-        return $info;
+        $rs = Redis::zAdd($key,time(),$goods_id);
+        if($rs){
+            return [
+                'erron' =>  3,
+                'msg'   =>  '点赞成功'
+            ];
+        }else{
+            return [
+                'erron' =>  522201,
+                'msg'   =>  '点赞失败'
+            ];
+        }
 
     }
 
@@ -150,6 +136,18 @@ class GoodsControllers
            $info[]=$data;
        }
         return $info;
+    }
+
+    /**
+     * 点赞列表
+     */
+
+    public function cartadd5(Request $request){
+        $uid = $request->input('uid');
+        $key = 'str:goods_click:'.$uid;
+        $res = Redis::zrange($key,0,-1);
+        print_r($res);
+
     }
 
 }
