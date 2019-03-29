@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: 张琦
- * Date: 2019/3/26
- * Time: 下午 07:44
- */
-
 namespace App\Http\Controllers\Order;
 use App\Model\CartAdd;
 use App\Model\CartModel;
