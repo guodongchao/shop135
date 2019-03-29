@@ -47,3 +47,6 @@ Route::get('/order/show','Order\IndexController@show');//订单展示
 
 Route::post('/friend','Friend\FriendController@show');//好友展示
 Route::post('/del','Friend\FriendController@del');//删除好友
+
+Route::get('/homepage/addfir','Friend\FriendController@addFirend');//添加好友
+Route::get('/homepage','Friend\FriendController@homepage');//个人主页
