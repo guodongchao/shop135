@@ -208,15 +208,21 @@ class UserController extends Controller
 
         $name = $request->input('u_name');
 
+        $tel = $request->input('u_tel');
+
         $password = $request->input('u_pwd');
         //echo $password;exit;
         //$redirect = urldecode($request->input('redirect')) ?? env('SHOP_URL');
+          if(empty($name)){
+                   $where=[
+                   'tel' => $tel
+              ];
+        }else{
+              $where=[
+                  'name' => $name
+              ];
+          }
 
-        $where=[
-
-            'name'=>$name
-
-        ];
 
         $userInfo=UserModel::where($where)->first();
 
@@ -320,7 +326,7 @@ class UserController extends Controller
 
         $pass=$request->input('u_pwd');
 
-        $pass1=$request->input('u_pwd1');
+        $pass1=$request->input('yespwd');
 
         $re=UserModel::where(['name'=>$request->input('u_name')])->first();
 
