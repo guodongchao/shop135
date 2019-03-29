@@ -20,7 +20,7 @@ class FriendController extends Controller
     }
     public function delete(Request $request){
         $id=$request->input('id');
-        $info = FriendModel::where(['id' =>$id])->del();
+        $info = FriendModel::where(['id' =>$id])->delete();
         if ($info == true){
             return '删除成功';
         }else{
