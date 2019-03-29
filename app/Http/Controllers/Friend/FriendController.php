@@ -113,7 +113,7 @@ class FriendController extends Controller
             ];
         }else{
             $info=[
-                'error'=>0,
+                'error'=>5000,
                 'msg'   =>'好友不存在'
             ];
         }
