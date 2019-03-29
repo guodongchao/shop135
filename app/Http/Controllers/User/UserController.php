@@ -306,6 +306,8 @@ class UserController extends Controller
 
             'email'=>$request->input('u_email'),
 
+            'tel'=>$request->input('u_tel'),
+
             'reg_time'=>time(),
 
         ];
