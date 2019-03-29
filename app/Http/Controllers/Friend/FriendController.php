@@ -20,6 +20,7 @@ class FriendController extends Controller
         }
         return $info;
     }
+
     public function addFirend(Request $request)
     {
         //查看用户id
@@ -41,14 +42,23 @@ class FriendController extends Controller
         }
         return $response;
     }
-    public function del(Request $request){
+
+    public function delete(Request $request){
+
         $id=$request->input('id');
-        $info = FriendModel::where(['id' =>$id])->del();
-        if ($info == true){
-            return '删除成功';
+        $info = FriendModel::where(['id' =>$id])->delete();
+        if ($info){
+            $response=[
+                'errno'=>0,
+                'msg'  =>"删除成功"
+            ];
         }else{
-            return '删除失败';
+            $response=[
+                'errno'=>50002,
+                'msg'  =>"删除失败"
+            ];
         }
+        return $response;
     }
     public function homePage(Request $request)
     {
