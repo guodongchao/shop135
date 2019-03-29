@@ -4,7 +4,7 @@ use App\Model\FriendModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class IndexController extends Controller
+class FriendController extends Controller
 {
     public function show(Request $request){
         $uid=$request->input('uid');
