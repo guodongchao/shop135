@@ -107,11 +107,8 @@ class FriendController extends Controller
         $u_name=$request->input('u_name');
         $arr=UserModel::where(['name'=>$u_name])->get();
         if (empty($arr)) {
-            $arr=[
-                'errno'=>50001,
-                'msg'  =>"暂无用户"
-            ];
-            return $arr;
+
+            return '没有';
          }
         return $arr ;
     }
