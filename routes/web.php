@@ -19,6 +19,9 @@ Route::get('/', function () {
 Route::get('/userlogin', 'User\UserController@loginView');//访问登录页面
 Route::post('/userlogin', 'User\UserController@loginAction');//登录页面
 
+Route::get('/userreg', 'User\UserController@registerView');//访问登录页面
+Route::post('/userreg', 'User\UserController@registerAction');//登录页面
+
 //移动端
 Route::get('/apilogin','User\UserController@alogin'); //访问登录页面
 Route::post('/apilogin','User\UserController@apilogins'); //登录页面
