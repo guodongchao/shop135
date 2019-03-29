@@ -144,14 +144,15 @@ class GoodsControllers
 
     public function cartadd5(Request $request){
         $uid = $request->input('uid');
-        $key = 'str:goods_click:'.$uid;
+        $key = 'sets:goods_click:'.$uid;
         $res = Redis::zrange($key,0,-1);
+       // var_dump($res);exit;
 
         foreach ($res as $k=>$v){
-            $data=GoodsModel::where(['goods_id'=>$v])->get()->toArray();
-            $info[]=$data;
+            $arr=GoodsModel::where(['goods_id'=>$v])->get()->toArray();
+            $data[]=$arr;
         }
-        return $info;
+        return $data;
 
     }
 
