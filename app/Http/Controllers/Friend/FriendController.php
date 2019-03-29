@@ -18,7 +18,7 @@ class FriendController extends Controller
         }
         return $info;
     }
-    public function del(Request $request){
+    public function delete(Request $request){
         $id=$request->input('id');
         $info = FriendModel::where(['id' =>$id])->del();
         if ($info == true){
