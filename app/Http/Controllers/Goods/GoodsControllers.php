@@ -144,9 +144,10 @@ class GoodsControllers
 
     public function cartadd5(Request $request){
         $uid = $request->input('uid');
-        $key = 'str:goods_detail:'.$uid;
+        $key = 'str:goods_click:'.$uid;
         $res = Redis::zrange($key,0,-1);
         print_r($res);
+
     }
 
 }
