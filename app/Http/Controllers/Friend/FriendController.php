@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Order;
+namespace App\Http\Controllers\Friend;
 use App\Model\FriendModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
