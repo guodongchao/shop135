@@ -44,4 +44,5 @@ Route::post('/order','Order\IndexController@add');//生成订单
 Route::get('/order/show','Order\IndexController@show');//订单展示
 
 
-Route::post('/friend','Friend\FriendController@show');//生成订单
+Route::post('/friend','Friend\FriendController@show');//好友展示
+Route::post('/del','Friend\FriendController@del');//删除好友
