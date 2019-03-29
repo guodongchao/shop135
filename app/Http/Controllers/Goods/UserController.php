@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Redis;
 
 class UserController extends Controller
 {
-    public function cart(){
-        $data = CartModel::get();
-      //  print_r($res);
-        return $data;
+    public function cart(Request $request){
+        $uid=$request->input('uid');
+        $data=[
+          'uid' =>$uid,
+          'status'=>1
+        ];
+        $arr = CartModel::where($data)->get();
+        return $arr;
     }
 }

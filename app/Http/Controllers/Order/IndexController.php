@@ -13,16 +13,21 @@ class IndexController extends Controller
     {
         //查询购物车商品
         $cart_id=$request->input('cart_id');
-        //$cart_id=1;
+        $uid=$request->input('uid');
+        //根据id查询一条数据
         $info = CartAdd::where(['cart_id' =>$cart_id])->first();
         if (empty($info)) {
-            die("购物车中无商品");
+            $response=[
+                'errno'=>50001,
+                'msg'  =>"购物车已无次商品"
+            ];
+            return $response;
         }
         //生成订单号
         $order_sn = OrderModel::Ordernumber();
         $data = [
             'order_sn' => $order_sn,
-            'uid' => session()->get('uid'),
+            'uid' => $uid,
             'add_time' => time(),
             'order_amount' => $info['cart_pirce']
         ];
@@ -33,6 +38,7 @@ class IndexController extends Controller
                'errno'=>0,
                'msg'  =>"订单成功"
            ];
+            CartAdd::where(['cart_id'=>$cart_id])->update(['status'=>2]);
         } else {
             $response=[
                 'errno'=>50001,
@@ -42,9 +48,14 @@ class IndexController extends Controller
         return $response;
     }
 
-    public function show()
+    public function show(Request $request)
     {
-        $list = OrderModel::get();
+        $uid=$request->input('uid');
+        $data=[
+            'uid' =>$uid,
+            'status' =>1
+        ];
+        $list = OrderModel::where($data)->get();
         return $list;
     }
 }
