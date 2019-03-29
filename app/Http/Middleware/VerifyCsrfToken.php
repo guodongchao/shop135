@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
+        '/*',
         '/order',
         '/show',
         '/apilogin',
@@ -19,6 +20,7 @@ class VerifyCsrfToken extends Middleware
         '/cartadd4',
         '/cartadd5',
         '/pwd',
-        '/friend'
+        '/friend',
+        '/del',
     ];
 }
