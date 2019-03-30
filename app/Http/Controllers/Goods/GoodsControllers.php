@@ -13,15 +13,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 class GoodsControllers
 {
+    /*
+     * 展示所有商品
+     */
     public function show(){
         $info=GoodsModel::get();
         return $info;
     }
+    /*
+     * 商品详情页
+     */
     public function showadd(Request $request){
-        $id=$request->input('id');
-
+        $goods_id=$request->input('id');
+        $key = 'sets:goods_browse:'.$goods_id;
+        $rs = Redis::zAdd($key,time(),$goods_id);
         $data=[
-            'goods_id'=>$id
+            'goods_id'=>$goods_id
         ];
         $info=GoodsModel::where($data)->get();
         return $info;
