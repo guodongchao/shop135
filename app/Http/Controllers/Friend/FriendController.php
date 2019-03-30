@@ -1,11 +1,9 @@
 <?php
 namespace App\Http\Controllers\Friend;
-use foo\bar;
 use App\Model\FriendModel;
 use App\Model\UserModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redis;
 
 class FriendController extends Controller
 {
@@ -41,7 +39,7 @@ class FriendController extends Controller
         }
         return $response;
     }
-    
+
 
     public function friendshow(Request $request){
         $u_name=$request->input('u_name');
