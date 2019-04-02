@@ -1,76 +1,61 @@
 <!doctype html>
 <html>
-
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <link href="css/mui.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href=".../public/bootstrap/css/bootstrap.min.css">
+    <title>登录</title>
+    <script src=""></script>
+    <meta name="csrf-token" content="{{csrf_token()}}">
+    <link rel="stylesheet" href="{{URL::asset('/bootstrap/css/bootstrap.min.css')}}">
 
 </head>
 
 <body>
+<h2>请登录</h2>
 
-<header class="mui-bar mui-bar-nav">
-    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-    <h1 class="mui-title">Login</h1>
-</header>
-<div class="mui-content">
-    <form id='login-form' class="mui-input-group">
-        <div class="mui-input-row">
-            <label>用户名</label>
-            <input type="text" class="form-control" id="u_name" name="u_name" placeholder="请输入用户名">
-        </div>
-        <div class="mui-input-row">
-            <label>密码</label>
-            <input type="password" class="form-control" id="u_pwd" name="u_pwd" placeholder="请输入密码">
-        </div>
-    </form>
-    <div class="mui-content-padded">
-        <button  class="btn btn-success btn-block" onclick="reg()">登陆</button>
-    </div>
+<div class="form-group">
+    <label for="exampleInputName1">用户名</label>
+    <input type="text" class="form-control" id="exampleInputName1" placeholder="用户名" name="u_name">
 </div>
+<div class="form-group">
+    <label for="exampleInputPassword1">密码</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="u_pwd">
 </div>
-</body>
+<button class="btn btn-success btn-block" onclick="login()">登录</button>
 
 
-<script src="js/mui.min.js"></script>
+<script src="{{URL::asset('/js/jquery-1.12.4.min.js')}}"></script>
+<script src="{{URL::asset('/bootstrap/js/bootstrap.min.js')}}"></script>
 <script>
-    function reg(){
-        var user_name=document.getElementById('u_name').value;
-        var user_pwd=document.getElementById('u_pwd').value;
-        mui.ajax({
-            url: 'http://shop135.qianqianya.xyz/apilogin',
-            data: {u_name:user_name,u_pwd:user_pwd},
+    function login(){
+        //e.preventDefault();
+        var u_name = document.getElementById('exampleInputName1').value;
+        var u_pwd = document.getElementById('exampleInputPassword1').value;
+        //alert(u_pwd);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: 'login',
+            data: {u_name:u_name,u_pwd:u_pwd},
+            async: true, // 异步 || 同步
             dataType: 'json',
             type: 'post',
+            timeout: 10000,
             success: function(data) {
-                //alert(data);
-                if(data.errno==0){
+                // 请求成功
+                if(data.errno == 0){
                     alert(data.msg);
-                    //location.href="user_center.html";
-
-                    var webview=mui.openWindow({
-                        url:'user_center.html',
-                        extras:{
-                            uid:data.uid
-                        },
-                    })
-
-                    //alert(data.token);
+                    location.href = "{{$redirect}}";
                 }else{
-                    alert('账号或密码错误，请重试！');
-                    location.href="login.html";
+                    var msg = data.errno + ":" + data.msg;
+                    alert(msg);
                 }
-
             },
-            error: function(data) {
-                alert('系统异常，请重试！');
-                location.href="login.html";
-            }
-
         });
     }
 </script>
+</body>
+
 </html>
