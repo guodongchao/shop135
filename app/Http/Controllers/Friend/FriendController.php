@@ -10,8 +10,12 @@ class FriendController extends Controller
     public function show(Request $request){
         $uid=$request->input('uid');
         $info=UserModel::get();
-        print_r($info);exit;
-
+        if($info.state==1){
+            $info.state=='在线';
+        }
+        if($info.state==2){
+            $info.state=='离线';
+        }
         if (empty($info)) {
             $response=[
                 'errno'=>50001,
