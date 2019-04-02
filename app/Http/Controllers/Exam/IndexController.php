@@ -2,7 +2,7 @@
 
 
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Index;
 
 
 
@@ -15,7 +15,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redis;
 
 
-class UserController extends Controller
+class IndexController extends Controller
 
 {
 
