@@ -10,6 +10,7 @@ class FriendController extends Controller
     public function show(Request $request){
         $uid=$request->input('uid');
         $info=UserModel::get();
+        print_r($info);exit;
 
         if (empty($info)) {
             $response=[
