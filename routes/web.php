@@ -59,8 +59,6 @@ Route::post('/friendadd','Friend\FriendController@friendadd');//好友添加
 Route::post('/del','Friend\FriendController@delete');//删除好友
 
 
-//移动端
-Route::get('/examlogin','Exam\IndexController@alogin'); //访问登录页面
-Route::post('/examlogin','Exam\IndexController@apilogins'); //登录页面
+
 
 

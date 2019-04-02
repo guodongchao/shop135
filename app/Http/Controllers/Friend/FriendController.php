@@ -9,11 +9,11 @@ class FriendController extends Controller
 {
     public function show(Request $request){
         $uid=$request->input('uid');
-        $info = FriendModel::where(['uid' =>$uid])->get();
+        $info = UserModel::where(['uid' =>$uid])->get();
         if (empty($info)) {
             $response=[
                 'errno'=>50001,
-                'msg'  =>"暂无好友"
+                'msg'  =>"暂无用户"
             ];
             return $response;
         }

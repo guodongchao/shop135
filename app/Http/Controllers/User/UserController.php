@@ -19,63 +19,7 @@ class UserController extends Controller
 
 {
 
-    /*
-     * 修改密码
-     */
-    public function pwd(Request $request){
-        //用户id
-        $uid=$request->input('uid');
-        //用户原密码
-        $u_pwd=$request->input('u_pwd');
-        //用户新密码
-        $upwd=$request->input('upwd');
-        //确认新密码
-        $upwd2=$request->input('upwd2');
-        $arr=UserModel::where(['uid'=>$uid])->first();
-        if(!empty($arr)){
-            $pass=$arr->pass;
-            if(password_verify($u_pwd,$pass)){
-                if($upwd==$upwd2){
-                    if($upwd==$u_pwd){
-                        $info=[
-                            'erron'=>50004,
-                            'msg'  =>'新密码不能和原密码一致'
-                        ];
-                    }else{
-                        $upwd=password_hash($upwd,PASSWORD_BCRYPT);
-                        $res=UserModel::where(['uid'=>$uid])->update(['pass'=>$upwd]);
-                        if($res){
-                            $info=[
-                                'erron'=>0,
-                                'msg'  =>'修改成功'
-                            ];
-                        }else{
-                            $info=[
-                                'erron'=>50005,
-                                'msg'  =>'修改失败'
-                            ];
-                        }
-                    }
-                }else{
-                    $info=[
-                      'erron'=>50001,
-                      'msg'  =>'密码不一致'
-                    ];
-                }
-            }else{
-                $info=[
-                    'erron'=>50002,
-                    'msg'  =>'原密码错误'
-                ];
-            }
-        }else{
-            $info=[
-                'erron'=>50003,
-                'msg'  =>'用户不存在'
-            ];
-        }
-        return $info;
-    }
+
     //手机端登录页面
     public function alogin(){
         $recurl=$_GET["recurl"] ?? env("SHOP_URL");
@@ -497,7 +441,63 @@ class UserController extends Controller
 
     }
 
-
+    /*
+     * 修改密码
+     */
+    public function pwd(Request $request){
+        //用户id
+        $uid=$request->input('uid');
+        //用户原密码
+        $u_pwd=$request->input('u_pwd');
+        //用户新密码
+        $upwd=$request->input('upwd');
+        //确认新密码
+        $upwd2=$request->input('upwd2');
+        $arr=UserModel::where(['uid'=>$uid])->first();
+        if(!empty($arr)){
+            $pass=$arr->pass;
+            if(password_verify($u_pwd,$pass)){
+                if($upwd==$upwd2){
+                    if($upwd==$u_pwd){
+                        $info=[
+                            'erron'=>50004,
+                            'msg'  =>'新密码不能和原密码一致'
+                        ];
+                    }else{
+                        $upwd=password_hash($upwd,PASSWORD_BCRYPT);
+                        $res=UserModel::where(['uid'=>$uid])->update(['pass'=>$upwd]);
+                        if($res){
+                            $info=[
+                                'erron'=>0,
+                                'msg'  =>'修改成功'
+                            ];
+                        }else{
+                            $info=[
+                                'erron'=>50005,
+                                'msg'  =>'修改失败'
+                            ];
+                        }
+                    }
+                }else{
+                    $info=[
+                        'erron'=>50001,
+                        'msg'  =>'密码不一致'
+                    ];
+                }
+            }else{
+                $info=[
+                    'erron'=>50002,
+                    'msg'  =>'原密码错误'
+                ];
+            }
+        }else{
+            $info=[
+                'erron'=>50003,
+                'msg'  =>'用户不存在'
+            ];
+        }
+        return $info;
+    }
 
 
 }
