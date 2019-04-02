@@ -6,13 +6,13 @@ namespace App\Http\Controllers\User;
 
 
 
-use App\Model\UserModel;
+    use App\Model\UserModel;
 
-use Illuminate\Http\Request;
+    use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
+    use App\Http\Controllers\Controller;
 
-use Illuminate\Support\Facades\Redis;
+    use Illuminate\Support\Facades\Redis;
 
 
 class UserController extends Controller
