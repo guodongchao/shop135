@@ -9,7 +9,7 @@ class FriendController extends Controller
 {
     public function show(Request $request){
         $uid=$request->input('uid');
-        $info = UserModel::where(['uid' =>$uid])->get();
+        $info=UserModel::get();
         if (empty($info)) {
             $response=[
                 'errno'=>50001,
